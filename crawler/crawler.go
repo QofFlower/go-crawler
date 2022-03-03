@@ -69,8 +69,8 @@ func GetHttpHtmlContent(url string, selector string, sel interface{}) (string, e
 	return htmlContent, nil
 }
 
-// joinSelector selector过滤规则拼接
-func joinSelector(selectorData ...*SelectorData) string {
+// JoinSelector selector过滤规则拼接
+func JoinSelector(selectorData ...*SelectorData) string {
 	var strs []string
 	for _, v := range selectorData {
 		strs = append(strs, v.Selector)
@@ -88,7 +88,7 @@ func GetSpecialData(htmlContent string, selectorData ...*SelectorData) ([]Job, e
 	}
 	var tempJob Job
 	var res []Job
-	dom.Find(joinSelector(selectorData...)).Each(func(i int, selection *goquery.Selection) {
+	dom.Find(JoinSelector(selectorData...)).Each(func(i int, selection *goquery.Selection) {
 		if i == 0 || i%3 == JobTypeName {
 			tempJob.Name = selection.Text()
 		} else if i%3 == JobTypeBaseAndType {
